@@ -1,13 +1,13 @@
 // Copyright (c) 2021-2023. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
     Navigate,
     Outlet,
     useRoutes
 } from "react-router-dom";
 import { map } from "../../../core/functions/map";
-import { useRouteServiceWithNavigate } from "../../../../hg/frontend/hooks/useRouteServiceWithNavigate";
+import { useRouteServiceWithNavigate } from "../../hooks/useRouteServiceWithNavigate";
 
 // NOTE! Order in which these imports are done is essential -- it declares the order of SCSS files!
 // So, put components before layouts, and layouts before views. Otherwise layout's SCSS files will

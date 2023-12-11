@@ -5,9 +5,12 @@ import { HttpService } from "../../core/HttpService";
 import { ReadonlyJsonAny } from "../../core/Json";
 import { LogService } from "../../core/LogService";
 import { isString } from "../../core/types/String";
-import { RefreshCallback, useAsyncResource } from "../../../hg/frontend/hooks/useAsyncResource";
 import { explainAppDTO, AppDTO, isAppDTO } from "../../core/dto/AppDTO";
 import { populateAppDTO } from "../../core/utils/populateAppDTO";
+import {
+    RefreshCallback,
+    useAsyncResource,
+} from "./useAsyncResource";
 
 const LOG = LogService.createLogger( 'useHyperDefinitions' );
 

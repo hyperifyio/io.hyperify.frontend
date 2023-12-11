@@ -6,10 +6,10 @@ import {
     useState,
 } from "react";
 import { LogService } from "../../../core/LogService";
-import { useServiceEvent } from "../../../../hg/frontend/hooks/useServiceEvent";
 import {
     AppDTO,
 } from "../../../core/dto/AppDTO";
+import { useServiceEvent } from "../../hooks/useServiceEvent";
 import { HyperRenderer } from "../../renderers/HyperRenderer";
 import { AppServiceEvent } from "../../services/AppServiceType";
 import { AppServiceImpl } from "../../services/AppServiceImpl";
