@@ -6,8 +6,8 @@ import { ReadonlyJsonAny } from "../../../core/Json";
 import { LogService } from "../../../core/LogService";
 import { parseRequestMethod, RequestMethod, stringifyRequestMethod } from "../../../core/request/types/RequestMethod";
 import { isString } from "../../../core/types/String";
-import { Button } from "../../../../hg/frontend/components/button/Button";
-import { RouteService } from "../../../../hg/frontend/services/RouteService";
+import { RouteService } from "../../services/RouteService";
+import { Button } from "../button/Button";
 import { HYPER_ARTICLE_CLASS_NAME } from "../../../core/constants/classNames";
 import {
     ActionDTO,

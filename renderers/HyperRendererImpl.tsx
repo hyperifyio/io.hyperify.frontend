@@ -7,7 +7,7 @@ import { ReadonlyJsonObject } from "../../core/Json";
 import { LogService } from "../../core/LogService";
 import { isArray } from "../../core/types/Array";
 import { isString } from "../../core/types/String";
-import { Button } from "../../../hg/frontend/components/button/Button";
+import { Button } from "../components/button/Button";
 import {
     ActionDTO,
     isActionDTOOrStringOrUndefined,
