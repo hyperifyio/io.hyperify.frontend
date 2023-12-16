@@ -1,10 +1,10 @@
 // Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
 
 import { ReactNode } from "react";
-import { ComponentContent, ComponentDTO } from "../../core/dto/ComponentDTO";
-import { AppDTO } from "../../core/dto/AppDTO";
-import { RouteDTO } from "../../core/dto/RouteDTO";
-import { ViewDTO } from "../../core/dto/ViewDTO";
+import { ComponentContent, ComponentDTO } from "../../core/entities/component/ComponentDTO";
+import { AppDTO } from "../../core/entities/app/AppDTO";
+import { RouteDTO } from "../../core/entities/route/RouteDTO";
+import { ViewDTO } from "../../core/entities/view/ViewDTO";
 import { HyperRoute } from "../components/types/HyperRoute";
 
 export interface HyperAppRenderer {

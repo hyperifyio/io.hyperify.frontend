@@ -1,6 +1,6 @@
 import { HyperRendererImpl } from './HyperRendererImpl';
 import React from "react";
-import {AppDTO} from "../../core/dto/AppDTO";
+import {AppDTO} from "../../core/entities/app/AppDTO";
 
 describe('HyperRendererImpl', () => {
     test('renderApp returns a defined and valid React element', () => {

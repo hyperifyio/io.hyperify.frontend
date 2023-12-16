@@ -21,23 +21,23 @@ import {
     explainComponentDTO,
     ComponentDTO,
     isComponentDTO,
-} from "../../core/dto/ComponentDTO";
+} from "../../core/entities/component/ComponentDTO";
 import {
     createAppDTO,
     explainAppDTO,
     AppDTO,
     isAppDTO,
-} from "../../core/dto/AppDTO";
+} from "../../core/entities/app/AppDTO";
 import {
     explainRouteDTO,
     RouteDTO,
     isRouteDTO,
-} from "../../core/dto/RouteDTO";
+} from "../../core/entities/route/RouteDTO";
 import {
     explainViewDTO,
     ViewDTO,
     isViewDTO,
-} from "../../core/dto/ViewDTO";
+} from "../../core/entities/view/ViewDTO";
 import { createLoadingAppDefinition } from "../../core/samples/loading/LoadingAppDefinition";
 import {
     AppServiceDestructor,

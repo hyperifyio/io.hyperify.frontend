@@ -2,8 +2,8 @@
 
 import { PropsWithChildren, ReactNode } from "react";
 import { HYPER_ARTICLE_CLASS_NAME } from "../../../core/constants/classNames";
-import { StyleDTO } from "../../../core/dto/StyleDTO";
-import { StyleEntity } from "../../../core/entities/StyleEntity";
+import { StyleDTO } from "../../../core/entities/style/StyleDTO";
+import { StyleEntity } from "../../../core/entities/style/StyleEntity";
 import { PropsWithClassName } from "../types/PropsWithClassName";
 import "./HyperArticle.scss";
 

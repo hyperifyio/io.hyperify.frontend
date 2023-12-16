@@ -12,13 +12,13 @@ import { HYPER_ARTICLE_CLASS_NAME } from "../../../core/constants/classNames";
 import {
     ActionDTO,
     isActionDTO,
-} from "../../../core/dto/ActionDTO";
-import { StyleDTO } from "../../../core/dto/StyleDTO";
+} from "../../../core/entities/action/ActionDTO";
+import { StyleDTO } from "../../../core/entities/style/StyleDTO";
 import {
     ViewDTO,
     isViewDTO,
-} from "../../../core/dto/ViewDTO";
-import { StyleEntity } from "../../../core/entities/StyleEntity";
+} from "../../../core/entities/view/ViewDTO";
+import { StyleEntity } from "../../../core/entities/style/StyleEntity";
 import { AppServiceImpl } from "../../services/AppServiceImpl";
 import { PropsWithClassName } from "../types/PropsWithClassName";
 import "./HyperActionButton.scss";

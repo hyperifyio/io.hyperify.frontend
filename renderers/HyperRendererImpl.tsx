@@ -11,14 +11,14 @@ import { Button } from "../components/button/Button";
 import {
     ActionDTO,
     isActionDTOOrStringOrUndefined,
-} from "../../core/dto/ActionDTO";
-import { ComponentContent, ComponentDTO, isComponentDTO } from "../../core/dto/ComponentDTO";
-import { AppDTO } from "../../core/dto/AppDTO";
-import { RouteDTO } from "../../core/dto/RouteDTO";
-import { StyleDTO } from "../../core/dto/StyleDTO";
-import { ViewDTO } from "../../core/dto/ViewDTO";
-import { HyperComponent } from "../../core/dto/types/HyperComponent";
-import { StyleEntity } from "../../core/entities/StyleEntity";
+} from "../../core/entities/action/ActionDTO";
+import { ComponentContent, ComponentDTO, isComponentDTO } from "../../core/entities/component/ComponentDTO";
+import { AppDTO } from "../../core/entities/app/AppDTO";
+import { RouteDTO } from "../../core/entities/route/RouteDTO";
+import { StyleDTO } from "../../core/entities/style/StyleDTO";
+import { ViewDTO } from "../../core/entities/view/ViewDTO";
+import { HyperComponent } from "../../core/entities/types/HyperComponent";
+import { StyleEntity } from "../../core/entities/style/StyleEntity";
 import { findAndPopulateViewDTO } from "../../core/utils/views/findAndPopulateViewDTO";
 import { populateComponentDTO } from "../../core/utils/components/populateComponentDTO";
 import { HyperActionButton } from "../components/actionButton/HyperActionButton";

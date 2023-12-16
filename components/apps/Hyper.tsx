@@ -8,7 +8,7 @@ import {
 import { LogService } from "../../../core/LogService";
 import {
     AppDTO,
-} from "../../../core/dto/AppDTO";
+} from "../../../core/entities/app/AppDTO";
 import { useServiceEvent } from "../../hooks/useServiceEvent";
 import { HyperRenderer } from "../../renderers/HyperRenderer";
 import { AppServiceEvent } from "../../services/AppServiceType";
