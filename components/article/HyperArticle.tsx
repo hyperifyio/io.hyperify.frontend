@@ -23,7 +23,7 @@ export function HyperArticle (props: HyperArticleProps) {
     const style = props?.style;
     return (
         <article className={HYPER_ARTICLE_CLASS_NAME + (className ? ` ${className}` : "")}
-                 style={ StyleEntity.createFromDTO(style).getCssStyles() }
+                 style={ StyleEntity.create(style).getCssStyles() }
         >{children}</article>
     );
 }
