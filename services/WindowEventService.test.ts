@@ -1,6 +1,6 @@
 // Copyright (c) 2021. Sendanor <info@sendanor.fi>. All rights reserved.
 
-import SpyInstance = jest.SpyInstance;
+import { jest } from '@jest/globals';
 import { WindowEventService,
     WindowEventServiceDestructor,
     WindowEventServiceEvent,
@@ -15,9 +15,9 @@ import { isFunction } from "../../core/types/Function";
 
 describe('WindowEventService', () => {
 
-    let callback: SpyInstance | undefined;
-    let callback2: SpyInstance | undefined;
-    let windowAddListener: SpyInstance | undefined;
+    let callback: any | undefined;
+    let callback2: any | undefined;
+    let windowAddListener: any | undefined;
     // let windowRemoveListener: SpyInstance | undefined;
     // let windowParentAddListener: SpyInstance | undefined;
     // let windowParentRemoveListener: SpyInstance | undefined;

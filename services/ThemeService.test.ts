@@ -1,5 +1,6 @@
 // Copyright (c) 2021-2021. Sendanor <info@sendanor.fi>. All rights reserved.
 
+import { jest } from '@jest/globals';
 import { ThemeService,
     ThemeServiceColorSchemeChangedEventCallback,
     ThemeServiceDestructor,
@@ -21,13 +22,12 @@ import { WindowEventService,
     WindowEventServiceEvent,
     WindowEventServiceJsonMessageEventCallback
 } from "./WindowEventService";
-import SpyInstance = jest.SpyInstance;
 import { LogLevel } from "../../core/types/LogLevel";
 import { isFunction } from "../../core/types/Function";
 
 describe('ThemeService', () => {
 
-    let callback : SpyInstance | undefined;
+    let callback : any | undefined;
     let listener : WindowServiceDestructor | undefined;
 
     let windowEventService_on_spy                   = jest.spyOn(WindowEventService, 'on');

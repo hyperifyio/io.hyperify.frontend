@@ -1,5 +1,6 @@
 // Copyright (c) 2020-2021. Sendanor <info@sendanor.fi>. All rights reserved.
 
+import { jest } from '@jest/globals';
 import { SessionStorageService, SessionStorageServiceDestructor} from "./SessionStorageService";
 import { WindowService, WindowServiceEvent} from "./WindowService";
 import {StorageServiceEvent} from "./types/AbtractStorageService";

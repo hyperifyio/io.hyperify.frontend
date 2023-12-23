@@ -1,5 +1,6 @@
 // Copyright (c) 2021-2021. Sendanor <info@sendanor.fi>. All rights reserved.
 
+import { jest } from '@jest/globals';
 import { ThemeLocalStorageService,
     COLOR_SCHEME_LOCAL_STORAGE_KEY,
     ThemeLocalStorageServiceEvent

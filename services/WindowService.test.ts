@@ -1,21 +1,21 @@
 // Copyright (c) 2021-2021. Sendanor <info@sendanor.fi>. All rights reserved.
 
+import { jest } from '@jest/globals';
 import { WindowService,
     DARK_COLOR_SCHEME_QUERY,
     WindowServiceDestructor,
     WindowServiceEvent
 } from "./WindowService";
 import { LogService } from "../../core/LogService";
-import SpyInstance = jest.SpyInstance;
 import {ColorScheme} from "../../core/style/types/ColorScheme";
 import { LogLevel } from "../../core/types/LogLevel";
 import { isFunction } from "../../core/types/Function";
 
 describe('WindowService', () => {
 
-    let callback : SpyInstance | undefined;
-    let windowAddListener : SpyInstance | undefined;
-    let windowRemoveListener : SpyInstance | undefined;
+    let callback : any | undefined;
+    let windowAddListener : any | undefined;
+    let windowRemoveListener : any | undefined;
     let listener : WindowServiceDestructor | undefined;
 
     let windowMatchMediaMock = jest.fn().mockImplementation(query => ({
@@ -101,7 +101,7 @@ describe('WindowService', () => {
             expect( matchMediaResultSpy.addEventListener ).toHaveBeenCalledTimes(1);
             expect( matchMediaResultSpy.addEventListener.mock.calls[0][0] ).toBe('change');
 
-            const eventCallback = matchMediaResultSpy.addEventListener.mock.calls[0][1];
+            const eventCallback : any = matchMediaResultSpy.addEventListener.mock.calls[0][1];
             expect( isFunction(eventCallback) ).toBe(true);
 
             expect( callback ).not.toHaveBeenCalled();
@@ -137,7 +137,7 @@ describe('WindowService', () => {
             expect( matchMediaResultSpy.addEventListener ).toHaveBeenCalledTimes(1);
             expect( matchMediaResultSpy.addEventListener.mock.calls[0][0] ).toBe('change');
 
-            const eventCallback = matchMediaResultSpy.addEventListener.mock.calls[0][1];
+            const eventCallback : any = matchMediaResultSpy.addEventListener.mock.calls[0][1];
             expect( isFunction(eventCallback) ).toBe(true);
 
             expect( callback ).not.toHaveBeenCalled();
@@ -324,7 +324,7 @@ describe('WindowService', () => {
             expect( matchMediaResultSpy.addEventListener ).toHaveBeenCalledTimes(1);
             expect( matchMediaResultSpy.addEventListener.mock.calls[0][0] ).toBe('change');
 
-            const eventCallback = matchMediaResultSpy.addEventListener.mock.calls[0][1];
+            const eventCallback : any = matchMediaResultSpy.addEventListener.mock.calls[0][1];
             expect( isFunction(eventCallback) ).toBe(true);
 
             expect( WindowService.getColorScheme() ).toBe(ColorScheme.DARK);
