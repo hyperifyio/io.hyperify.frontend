@@ -8,6 +8,7 @@ import {
 } from "react";
 import { ReadonlyJsonObject } from "../../../core/Json";
 import { LogService } from "../../../core/LogService";
+import { LogLevel } from "../../../core/types/LogLevel";
 import { isNumber } from "../../../core/types/Number";
 import { isString } from "../../../core/types/String";
 import { HYPER_VIEW_CLASS_NAME } from "../../../core/constants/classNames";
@@ -147,3 +148,7 @@ export function HyperView (props: HyperViewProps) {
         </div>
     );
 }
+
+HyperView.setLogLevel = (level: LogLevel) : void => {
+    LOG.setLogLevel(level);
+};

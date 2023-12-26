@@ -1,8 +1,13 @@
-import React from 'react';
 import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { HyperView, HyperViewProps } from './HyperView';
+import { LogLevel } from "../../../core/types/LogLevel";
+import { AppServiceImpl } from "../../services/AppServiceImpl";
+import {
+    HyperView,
+    HyperViewProps,
+} from './HyperView';
 
 jest.mock('react-helmet-async', () => {
     return {
@@ -17,6 +22,11 @@ describe('HyperView Component', () => {
         routePath: '/test',
         language: 'en',
     };
+
+    beforeAll(() => {
+        AppServiceImpl.setLogLevel(LogLevel.NONE);
+        HyperView.setLogLevel(LogLevel.NONE);
+    });
 
     it('renders without crashing', () => {
         const { container } = render(
