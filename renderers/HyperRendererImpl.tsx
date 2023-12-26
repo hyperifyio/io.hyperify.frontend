@@ -2,17 +2,17 @@
 
 import { ReactNode, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { isActionDTOOrStringOrUndefined } from "../../core/entities/action/ActionEntity";
+import { ComponentContent } from "../../core/entities/component/ComponentContent";
+import { isComponentDTO } from "../../core/entities/component/ComponentEntity";
 import { map } from "../../core/functions/map";
 import { ReadonlyJsonObject } from "../../core/Json";
 import { LogService } from "../../core/LogService";
 import { isArray } from "../../core/types/Array";
 import { isString } from "../../core/types/String";
 import { Button } from "../components/button/Button";
-import {
-    ActionDTO,
-    isActionDTOOrStringOrUndefined,
-} from "../../core/entities/action/ActionDTO";
-import { ComponentContent, ComponentDTO, isComponentDTO } from "../../core/entities/component/ComponentDTO";
+import { ActionDTO } from "../../core/entities/action/ActionDTO";
+import { ComponentDTO } from "../../core/entities/component/ComponentDTO";
 import { AppDTO } from "../../core/entities/app/AppDTO";
 import { RouteDTO } from "../../core/entities/route/RouteDTO";
 import { StyleDTO } from "../../core/entities/style/StyleDTO";
@@ -265,7 +265,7 @@ export class HyperRendererImpl implements HyperRenderer {
      */
     public static defaultRenderContent (
         renderer    : HyperRenderer,
-        content     : undefined | ComponentContent,
+        content     : undefined | ComponentContent | string | ComponentDTO,
         definitions : AppDTO,
     ) : ReactNode {
 
@@ -294,22 +294,24 @@ export class HyperRendererImpl implements HyperRenderer {
 
             if (populatedComponent.name === HyperComponent.ActionButton) {
 
+                const meta = content?.meta ?? {};
+
                 // FIXME: This should default to the current route
-                const hrefData = content?.meta?.href;
+                const hrefData = meta?.href;
                 const href : string | undefined = isString(hrefData) ? hrefData : undefined;
 
-                const methodData = content?.meta?.method;
+                const methodData = meta?.method;
                 const method : string | undefined = isString(methodData) ? methodData : undefined;
 
                 // FIXME: This should default to the current route
-                const successRedirectData = content?.meta?.successRedirect;
+                const successRedirectData = meta?.successRedirect;
                 const successRedirect : string | ActionDTO | undefined = isActionDTOOrStringOrUndefined(successRedirectData) ? successRedirectData : undefined;
 
                 // FIXME: This should default to the current route
-                const failureRedirectData = content?.meta?.failureRedirect;
+                const failureRedirectData = meta?.failureRedirect;
                 const failureRedirect : string | ActionDTO | undefined = isActionDTOOrStringOrUndefined(failureRedirectData) ? failureRedirectData : undefined;
 
-                const body = content?.meta?.body;
+                const body = meta?.body;
 
                 return (
                     <HyperActionButton
@@ -318,38 +320,38 @@ export class HyperRendererImpl implements HyperRenderer {
                         successRedirect={successRedirect}
                         failureRedirect={failureRedirect}
                         body={body}
-                        style={ populatedComponent.style }
+                        style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                     >{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</HyperActionButton>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.Article) {
                 return (
-                    <HyperArticle style={ populatedComponent.style }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</HyperArticle>
+                    <HyperArticle style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</HyperArticle>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.Table) {
                 return (
-                    <table style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</table>
+                    <table style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</table>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.TableRow) {
                 return (
-                    <tr style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</tr>
+                    <tr style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</tr>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.TableColumn) {
                 return (
-                    <td style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</td>
+                    <td style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</td>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.Button) {
                 return (
-                    <Button css={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</Button>
+                    <Button css={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</Button>
                 );
             }
 
@@ -358,13 +360,13 @@ export class HyperRendererImpl implements HyperRenderer {
                 const href : string = isString(hrefData) ? hrefData : '#';
                 if (internalRoutePaths.includes(href)) {
                     return (
-                        <Link style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }
+                        <Link style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                               className={"hg-button"}
                               to={ href }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</Link>
                     );
                 }
                 return (
-                    <a style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }
+                    <a style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                        className={"hg-button"}
                        href={ href }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</a>
                 );
@@ -376,57 +378,57 @@ export class HyperRendererImpl implements HyperRenderer {
                 if (internalRoutePaths.includes(href)) {
                     return (
                         <Link to={ href }
-                              style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }
+                              style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                         >{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</Link>
                     );
                 }
                 return (
                     <a href={ href }
-                       style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</a>
+                       style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</a>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.Div) {
-                return <div style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</div>
+                return <div style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</div>
             }
 
             if (populatedComponent.name === HyperComponent.Span) {
-                return <span style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</span>
+                return <span style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</span>
             }
 
             if (populatedComponent.name === HyperComponent.H1) {
-                return <h1 style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h1>
+                return <h1 style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h1>
             }
 
             if (populatedComponent.name === HyperComponent.H2) {
-                return <h2 style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h2>
+                return <h2 style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h2>
             }
 
             if (populatedComponent.name === HyperComponent.H3) {
-                return <h3 style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h3>
+                return <h3 style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h3>
             }
 
             if (populatedComponent.name === HyperComponent.H4) {
-                return <h4 style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h4>
+                return <h4 style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h4>
             }
 
             if (populatedComponent.name === HyperComponent.H5) {
-                return <h5 style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h5>
+                return <h5 style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h5>
             }
 
             if (populatedComponent.name === HyperComponent.H6) {
-                return <h6 style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h6>
+                return <h6 style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</h6>
             }
 
             if (populatedComponent.name === HyperComponent.Paragraph) {
-                return <p style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</p>
+                return <p style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</p>
             }
 
             if (populatedComponent.name === HyperComponent.Image) {
                 return (
                     <img src={ isString(populatedComponent.meta?.source) ? populatedComponent.meta?.source : '#' }
                          alt={ isString(populatedComponent.meta?.alt) ? populatedComponent.meta?.alt : '' }
-                         style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }
+                         style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                     />
                 );
             }
@@ -434,14 +436,14 @@ export class HyperRendererImpl implements HyperRenderer {
             if (populatedComponent.name === HyperComponent.Card) {
                 return (
                     <div className={"hyper-card"}
-                         style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</div>
+                         style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</div>
                 );
             }
 
             if (populatedComponent.name === HyperComponent.Accordion) {
                 return (
                     <div className={"hyper-accordion"}
-                         style={ StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</div>
+                         style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</div>
                 );
             }
 

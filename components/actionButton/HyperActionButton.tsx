@@ -1,6 +1,8 @@
 // Copyright (c) 2023. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
 import { PropsWithChildren, ReactNode, useCallback } from "react";
+import { isActionDTO } from "../../../core/entities/action/ActionEntity";
+import { isViewDTO } from "../../../core/entities/view/ViewEntity";
 import { HttpService } from "../../../core/HttpService";
 import { ReadonlyJsonAny } from "../../../core/Json";
 import { LogService } from "../../../core/LogService";
@@ -9,15 +11,9 @@ import { isString } from "../../../core/types/String";
 import { RouteService } from "../../services/RouteService";
 import { Button } from "../button/Button";
 import { HYPER_ARTICLE_CLASS_NAME } from "../../../core/constants/classNames";
-import {
-    ActionDTO,
-    isActionDTO,
-} from "../../../core/entities/action/ActionDTO";
+import { ActionDTO } from "../../../core/entities/action/ActionDTO";
 import { StyleDTO } from "../../../core/entities/style/StyleDTO";
-import {
-    ViewDTO,
-    isViewDTO,
-} from "../../../core/entities/view/ViewDTO";
+import { ViewDTO } from "../../../core/entities/view/ViewDTO";
 import { StyleEntity } from "../../../core/entities/style/StyleEntity";
 import { AppServiceImpl } from "../../services/AppServiceImpl";
 import { PropsWithClassName } from "../types/PropsWithClassName";
@@ -213,7 +209,7 @@ export function HyperActionButton (props: HyperActionButtonProps) {
 
     return (
         <Button
-            css={ StyleEntity.createFromDTO(style).getCssStyles() }
+            css={ style ? StyleEntity.createFromDTO(style).getCssStyles() : {} }
             click={clickCallback}
             className={HYPER_ARTICLE_CLASS_NAME + (className ? ` ${className}` : "")}
         >{children}</Button>

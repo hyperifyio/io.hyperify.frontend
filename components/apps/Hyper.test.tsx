@@ -1,3 +1,7 @@
+
+import {
+    jest
+} from '@jest/globals';
 import {Hyper} from "./Hyper";
 import {HyperRendererImpl} from "../../renderers/HyperRendererImpl";
 import { render } from '@testing-library/react';

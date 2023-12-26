@@ -1,11 +1,15 @@
 // Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
 
 import { useCallback } from "react";
+import {
+    explainAppDTO,
+    isAppDTO,
+} from "../../core/entities/app/AppEntity";
 import { HttpService } from "../../core/HttpService";
 import { ReadonlyJsonAny } from "../../core/Json";
 import { LogService } from "../../core/LogService";
 import { isString } from "../../core/types/String";
-import { explainAppDTO, AppDTO, isAppDTO } from "../../core/entities/app/AppDTO";
+import { AppDTO } from "../../core/entities/app/AppDTO";
 import { populateAppDTO } from "../../core/utils/populateAppDTO";
 import {
     RefreshCallback,

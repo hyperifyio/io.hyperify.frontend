@@ -1,5 +1,22 @@
 // Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
 
+import {
+    AppEntity,
+    explainAppDTO,
+    isAppDTO,
+} from "../../core/entities/app/AppEntity";
+import {
+    explainComponentDTO,
+    isComponentDTO,
+} from "../../core/entities/component/ComponentEntity";
+import {
+    explainRouteDTO,
+    isRouteDTO,
+} from "../../core/entities/route/RouteEntity";
+import {
+    explainViewDTO,
+    isViewDTO,
+} from "../../core/entities/view/ViewEntity";
 import { filter } from "../../core/functions/filter";
 import { find } from "../../core/functions/find";
 import { isEqual } from "../../core/functions/isEqual";
@@ -17,27 +34,10 @@ import {
 import { parseInteger } from "../../core/types/Number";
 import { isString } from "../../core/types/String";
 import { RouteService } from "./RouteService";
-import {
-    explainComponentDTO,
-    ComponentDTO,
-    isComponentDTO,
-} from "../../core/entities/component/ComponentDTO";
-import {
-    createAppDTO,
-    explainAppDTO,
-    AppDTO,
-    isAppDTO,
-} from "../../core/entities/app/AppDTO";
-import {
-    explainRouteDTO,
-    RouteDTO,
-    isRouteDTO,
-} from "../../core/entities/route/RouteDTO";
-import {
-    explainViewDTO,
-    ViewDTO,
-    isViewDTO,
-} from "../../core/entities/view/ViewDTO";
+import { ComponentDTO } from "../../core/entities/component/ComponentDTO";
+import { AppDTO } from "../../core/entities/app/AppDTO";
+import { RouteDTO } from "../../core/entities/route/RouteDTO";
+import { ViewDTO } from "../../core/entities/view/ViewDTO";
 import { createLoadingAppDefinition } from "../../core/samples/loading/LoadingAppDefinition";
 import {
     AppServiceDestructor,
@@ -363,24 +363,20 @@ export class AppServiceImpl {
         LOG.debug(`Saving view DTO: `, dto);
 
         const appDto : AppDTO = {
-            ...(this._appDefinition ? {
-                ...this._appDefinition,
-                views: [
-                    ...filter(
-                        this._appDefinition.views,
-                        (view: ViewDTO) : boolean => view.name !== dto.name
-                    ),
-                    dto,
-                ]
-            } : createAppDTO(
-                '',
-                undefined,
-                [],
-                undefined,
-                undefined,
-                [],
-                [dto],
-            )),
+            ...(
+                this._appDefinition
+                    ? {
+                        ...this._appDefinition,
+                        views: [
+                            ...filter(
+                                this._appDefinition.views,
+                                (view: ViewDTO) : boolean => view.name !== dto.name
+                            ),
+                            dto,
+                        ]
+                    }
+                    : AppEntity.create().addView(dto).getDTO()
+            ),
         };
 
         this.updateAppDefinitions(appDto, []).catch((err) => {

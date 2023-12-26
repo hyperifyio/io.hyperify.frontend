@@ -14,7 +14,7 @@ export interface HyperArticleProps
 {
     readonly className ?: string;
     readonly children  ?: ReactNode;
-    readonly style  ?: StyleDTO;
+    readonly style ?: StyleDTO;
 }
 
 export function HyperArticle (props: HyperArticleProps) {

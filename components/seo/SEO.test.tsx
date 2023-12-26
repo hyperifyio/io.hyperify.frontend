@@ -1,4 +1,6 @@
-import React from 'react';
+// Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
+
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
