@@ -9,6 +9,7 @@ import { LogService } from "../../../core/LogService";
 import {
     AppDTO,
 } from "../../../core/entities/app/AppDTO";
+import { LogLevel } from "../../../core/types/LogLevel";
 import { useServiceEvent } from "../../hooks/useServiceEvent";
 import { HyperRenderer } from "../../renderers/HyperRenderer";
 import { AppServiceEvent } from "../../services/AppServiceType";
@@ -67,4 +68,8 @@ export function Hyper (
     ]);
 
     return renderer.renderApp( dto );
+}
+
+Hyper.setLogLevel = (level: LogLevel) : void => {
+    LOG.setLogLevel(level);
 }

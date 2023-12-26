@@ -9,6 +9,7 @@ import { map } from "../../core/functions/map";
 import { ReadonlyJsonObject } from "../../core/Json";
 import { LogService } from "../../core/LogService";
 import { isArray } from "../../core/types/Array";
+import { LogLevel } from "../../core/types/LogLevel";
 import { isString } from "../../core/types/String";
 import { Button } from "../components/button/Button";
 import { ActionDTO } from "../../core/entities/action/ActionDTO";
@@ -31,6 +32,10 @@ import { HyperAppRenderer, HyperContentRenderer, HyperRenderer, HyperRouteRender
 const LOG = LogService.createLogger( 'HyperRendererImpl' );
 
 export class HyperRendererImpl implements HyperRenderer {
+
+    public static setLogLevel (level: LogLevel) : void {
+        LOG.setLogLevel(level);
+    }
 
     private static _fragmentIdIndex : number = 0;
     private _myFragmentBaseId : number = 0;

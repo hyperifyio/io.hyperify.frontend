@@ -1,11 +1,15 @@
-
-import {
-    jest
-} from '@jest/globals';
-import {Hyper} from "./Hyper";
-import {HyperRendererImpl} from "../../renderers/HyperRendererImpl";
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
-import {MemoryRouter} from "react-router-dom";
+import { mock } from "node:test";
+import { MemoryRouter } from "react-router-dom";
+import { HgTest } from "../../../core/HgTest";
+import { HttpService } from "../../../core/HttpService";
+import { LogLevel } from "../../../core/types/LogLevel";
+import { HyperRenderer } from "../../renderers/HyperRenderer";
+import { HyperRendererImpl } from "../../renderers/HyperRendererImpl";
+import { AppServiceImpl } from "../../services/AppServiceImpl";
+import { LazyHyperView } from "../views/LazyHyperView";
+import { Hyper } from "./Hyper";
 
 jest.mock('react-helmet-async', () => {
     return {
@@ -15,18 +19,92 @@ jest.mock('react-helmet-async', () => {
 
 describe('Hyper Component', () => {
 
+    let mockRenderer : HyperRenderer;
+
+    beforeAll( () => {
+        LazyHyperView.setLogLevel(LogLevel.NONE);
+        HyperRendererImpl.setLogLevel(LogLevel.NONE);
+        HttpService.setLogLevel(LogLevel.NONE);
+        AppServiceImpl.setLogLevel(LogLevel.NONE);
+        Hyper.setLogLevel(LogLevel.NONE);
+        HgTest.initialize();
+
+        mockRenderer = {
+            getPublicUrl: jest.fn<any>(),
+            attachAppRenderer: jest.fn<any>(),
+            renderApp: jest.fn<any>(),
+            attachRouteRenderer: jest.fn<any>(),
+            renderRoute: jest.fn<any>(),
+            renderRouteList: jest.fn<any>(),
+            renderView: jest.fn<any>(),
+            renderContent: jest.fn<any>(),
+        };
+
+    });
+
     describe('Hyper Component', () => {
 
         it('renders without crashing', () => {
+
             const hyperRendererImpl = HyperRendererImpl.create('https://localhost:3000');
+
+            (mockRenderer.renderApp as ReturnType<typeof jest.fn<any>>).mockReturnValue(<div />);
 
             const { container } = render(
                 <MemoryRouter>
-                    <Hyper url={'https://localhost:3000/api/v1'} renderer={hyperRendererImpl} />
+                    <Hyper url={'https://localhost:3000/api/v1'} renderer={mockRenderer} />
                 </MemoryRouter>
             );
 
+            expect(mockRenderer.renderApp).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    language : "en",
+                    name : "LoadingApp",
+                    publicUrl : "",
+                    components: expect.arrayContaining([
+                        expect.objectContaining({
+                            "content" : [],
+                            "extend" : "fi.nor.article",
+                            "name" : "TextComponent",
+                        }),
+                    ]),
+                    routes: expect.arrayContaining([
+                        expect.objectContaining({
+                            "name" : "LoadingRoute",
+                            "path" : "/",
+                            "view" : "LoadingView",
+                        }),
+                        expect.objectContaining({
+                            "name" : "AnyRoute",
+                            "path" : "*",
+                            "redirect" : "LoadingRoute",
+                        }),
+                    ]),
+                    views: expect.arrayContaining([
+                        expect.objectContaining({
+                            "name" : "DefaultView",
+                            "style" : {
+                                "background" : { "color" : { "value" : "#222222" } },
+                                "textColor" : { "value" : "#ffffff" },
+                            },
+                        }),
+                        expect.objectContaining({
+                            "content" : expect.arrayContaining([
+                                expect.objectContaining({
+                                    "content" : [ "...loading..." ],
+                                    "extend" : "TextComponent",
+                                    "name" : "loadingText",
+                                }),
+                            ]),
+                            "extend" : "DefaultView",
+                            "name" : "LoadingView",
+                        }),
+                    ])
+                })
+            );
+
             expect(container.firstChild).toBeInstanceOf(HTMLElement);
+
         });
     });
 });

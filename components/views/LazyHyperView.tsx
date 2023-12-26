@@ -6,6 +6,7 @@ import {
     useState,
 } from "react";
 import { LogService } from "../../../core/LogService";
+import { LogLevel } from "../../../core/types/LogLevel";
 import {
     HyperView,
     HyperViewProps,
@@ -70,3 +71,7 @@ export function LazyHyperView ( props: HyperViewProps) {
         >{props.children}</HyperView>
     );
 }
+
+LazyHyperView.setLogLevel = (level: LogLevel) : void => {
+    LOG.setLogLevel(level);
+};

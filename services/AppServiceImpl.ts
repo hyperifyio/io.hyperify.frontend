@@ -31,6 +31,7 @@ import {
     Observer,
     ObserverCallback,
 } from "../../core/Observer";
+import { LogLevel } from "../../core/types/LogLevel";
 import { parseInteger } from "../../core/types/Number";
 import { isString } from "../../core/types/String";
 import { RouteService } from "./RouteService";
@@ -52,6 +53,10 @@ const LOG = LogService.createLogger( 'AppServiceImpl' );
  * @see AppServiceType for static public interface type.
  */
 export class AppServiceImpl {
+
+    public static setLogLevel (level: LogLevel) : void {
+        LOG.setLogLevel(level);
+    }
 
     /**
      * Default app definitions when the cached copy is not available.

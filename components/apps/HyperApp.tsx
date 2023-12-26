@@ -1,6 +1,10 @@
 // Copyright (c) 2021-2023. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
-import { ReactNode } from 'react';
+import {
+    JSXElementConstructor,
+    ReactElement,
+    ReactNode,
+} from 'react';
 import {
     Navigate,
     Outlet,
@@ -98,7 +102,7 @@ export function HyperApp (
         )
     };
 
-    const routing = useRoutes(
+    const routing :  ReactElement<any, string | JSXElementConstructor<any>> | null = useRoutes(
         [ mainRoutes ]
     );
 

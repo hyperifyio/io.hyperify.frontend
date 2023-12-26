@@ -1,7 +1,8 @@
 // Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
 
 import { ReactNode } from "react";
-import { ComponentContent, ComponentDTO } from "../../core/entities/component/ComponentDTO";
+import { ComponentContent } from "../../core/entities/component/ComponentContent";
+import { ComponentDTO } from "../../core/entities/component/ComponentDTO";
 import { AppDTO } from "../../core/entities/app/AppDTO";
 import { RouteDTO } from "../../core/entities/route/RouteDTO";
 import { ViewDTO } from "../../core/entities/view/ViewDTO";

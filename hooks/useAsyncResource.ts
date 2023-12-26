@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { isEqual } from "../../core/functions/isEqual";
 import { LogService } from "../../core/LogService";
+import { LogLevel } from "../../core/types/LogLevel";
 
 const LOG = LogService.createLogger('useAsyncResource');
 
@@ -102,3 +103,7 @@ export function useAsyncResource<T> (
     return [result, refreshCallback];
 
 }
+
+useAsyncResource.setLogLevel = (level: LogLevel) : void => {
+    LOG.setLogLevel(level);
+};
