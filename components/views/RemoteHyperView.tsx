@@ -1,13 +1,17 @@
 // Copyright (c) 2022-2023. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
 import { ReactNode, useState } from "react";
+import {
+    explainViewDTO,
+    isViewDTO,
+} from "../../../core/entities/view/ViewEntity";
 import { startsWith } from "../../../core/functions/startsWith";
 import { HttpService } from "../../../core/HttpService";
 import { ReadonlyJsonObject } from "../../../core/Json";
 import { LogService } from "../../../core/LogService";
 import { AppDTO } from "../../../core/entities/app/AppDTO";
 import { StyleDTO } from "../../../core/entities/style/StyleDTO";
-import { explainViewDTO, ViewDTO, isViewDTO } from "../../../core/entities/view/ViewDTO";
+import { ViewDTO } from "../../../core/entities/view/ViewDTO";
 import { PropsWithClassName } from "../types/PropsWithClassName";
 import { HyperView } from "./HyperView";
 import "./RemoteHyperView.scss";
