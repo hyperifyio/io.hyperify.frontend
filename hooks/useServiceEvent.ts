@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import { LogService } from "../../core/LogService";
-import { EventCallbackWithArgs, VoidCallback } from "../../core/interfaces/callbacks";
+import { EventCallbackWithArgs } from "../../core/interfaces/callbacks";
 import { ObserverCallback, ObserverDestructor } from "../../core/Observer";
 import { isPromise } from "../../core/types/Promise";
 
@@ -23,7 +23,7 @@ export function useServiceEvent<T extends keyof any> (
     },
     event: T,
     callback: EventCallbackWithArgs<T>
-) {
+) : void {
     const onEventCallback = useCallback(
         (eventName: T, ...params: any[]) => {
             LOG.debug(`Event "${event.toString()}": Calling callback`);
