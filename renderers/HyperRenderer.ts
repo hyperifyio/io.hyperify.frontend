@@ -1,7 +1,7 @@
-// Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
+// Copyright (c) 2023-2024. Sendanor <info@sendanor.fi>. All rights reserved.
 
 import { ReactNode } from "react";
-import { ComponentContent } from "../../core/entities/component/ComponentContent";
+import { ComponentDTOContent } from "../../core/entities/component/ComponentContent";
 import { ComponentDTO } from "../../core/entities/component/ComponentDTO";
 import { AppDTO } from "../../core/entities/app/AppDTO";
 import { RouteDTO } from "../../core/entities/route/RouteDTO";
@@ -24,7 +24,7 @@ export interface HyperViewRenderer {
 
 export interface HyperContentRenderer {
     (
-        content     : undefined | ComponentContent,
+        content     : undefined | ComponentDTOContent,
         definitions : AppDTO,
     ) : ReactNode;
 }
@@ -107,7 +107,7 @@ export interface HyperRenderer {
      * @param definitions
      */
     renderContent (
-        content     : undefined | ComponentContent,
+        content     : undefined | ComponentDTOContent,
         definitions : AppDTO,
     ) : ReactNode;
 

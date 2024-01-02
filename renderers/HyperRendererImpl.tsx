@@ -1,9 +1,11 @@
-// Copyright (c) 2023. Sendanor <info@sendanor.fi>. All rights reserved.
+// Copyright (c) 2023-2024. Sendanor <info@sendanor.fi>. All rights reserved.
 
 import { ReactNode, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { isActionDTOOrStringOrUndefined } from "../../core/entities/action/ActionEntity";
-import { ComponentContent } from "../../core/entities/component/ComponentContent";
+import {
+    ComponentDTOContent,
+} from "../../core/entities/component/ComponentContent";
 import { isComponentDTO } from "../../core/entities/component/ComponentEntity";
 import { map } from "../../core/functions/map";
 import { ReadonlyJsonObject } from "../../core/Json";
@@ -145,7 +147,7 @@ export class HyperRendererImpl implements HyperRenderer {
      * @inheritDoc
      */
     public renderContent (
-        content     : undefined | ComponentContent,
+        content     : undefined | ComponentDTOContent,
         definitions : AppDTO,
     ) : ReactNode {
         return this._contentRenderer(content, definitions);
@@ -270,7 +272,7 @@ export class HyperRendererImpl implements HyperRenderer {
      */
     public static defaultRenderContent (
         renderer    : HyperRenderer,
-        content     : undefined | ComponentContent | string | ComponentDTO,
+        content     : undefined | ComponentDTOContent | string | ComponentDTO,
         definitions : AppDTO,
     ) : ReactNode {
 
