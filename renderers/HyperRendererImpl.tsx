@@ -334,7 +334,7 @@ export class HyperRendererImpl implements HyperRenderer {
 
             if (populatedComponent.name === HyperComponent.Article) {
                 return (
-                    <HyperArticle style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</HyperArticle>
+                    <article style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</article>
                 );
             }
 
