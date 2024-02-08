@@ -320,9 +320,6 @@ export class HyperRendererImpl implements HyperRenderer {
 
                 const body = meta?.body;
 
-                console.log(populatedComponent.style)
-                console.log("HyperActionButton RETURN")
-
                 return (
                     <HyperActionButton
                         target={href}
@@ -370,8 +367,6 @@ export class HyperRendererImpl implements HyperRenderer {
                 const hrefData = populatedComponent.meta?.href;
                 const href : string = isString(hrefData) ? hrefData : '#';
                 if (internalRoutePaths.includes(href)) {
-                console.log(populatedComponent.style)
-                console.log('LINKBUTTON')
 
                     return (
                         <Link style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }

@@ -17,10 +17,8 @@ import { ViewDTO } from "../../../core/entities/view/ViewDTO";
 import { StyleEntity } from "../../../core/entities/style/StyleEntity";
 import { AppServiceImpl } from "../../services/AppServiceImpl";
 import { PropsWithClassName } from "../types/PropsWithClassName";
-import "./HyperActionButton.scss";
-import { ComponentDTO } from "../../../core/entities/component/ComponentDTO";
-import { populateComponentDTO } from "../../../core/utils/components/populateComponentDTO";
 import { CSSProperties } from 'react';
+import "./HyperActionButton.scss";
 
 const LOG = LogService.createLogger( 'HyperActionButton' );
 
@@ -38,7 +36,6 @@ export interface HyperActionButtonProps
     readonly failureRedirect ?: string | ActionDTO | undefined;
     readonly style     ?: StyleDTO;
     readonly css?: CSSProperties | undefined;
-
 
 }
 
@@ -177,7 +174,6 @@ export function HyperActionButton (props: HyperActionButtonProps) {
     const failureRedirect = props?.failureRedirect;
     const css = props?.css;
 
-
     const clickCallback = useCallback(
         () => {
 
@@ -215,10 +211,12 @@ export function HyperActionButton (props: HyperActionButtonProps) {
         ]
     );
 
-
     return (
         <Button
-            css={ css }
+            css={ { 
+                ...(style ? StyleEntity.createFromDTO(style).getCssStyles() : {}),
+                ...(css ? css : {}),
+              } }
             click={clickCallback}
             className={HYPER_ARTICLE_CLASS_NAME + (className ? ` ${className}` : "")}
         >{children}</Button>
