@@ -27,7 +27,7 @@ export interface ButtonProps {
     readonly blur?: VoidCallback;
     readonly keyDown?: EventCallback<KeyboardEvent>;
     readonly buttonRef?: RefObject<HTMLButtonElement>;
-    readonly style ?: ButtonStyle;
+    readonly ButtonStyle ?: ButtonStyle;
     readonly enabled?: boolean;
     readonly children?: ReactNode;
     readonly css?: CSSProperties | undefined;
@@ -40,7 +40,7 @@ export function Button (props: ButtonProps) {
     const className = props?.className;
     const css = props?.css;
     const children = props?.children;
-    const buttonStyle = props?.style ?? ButtonStyle.SECONDARY;
+    const buttonStyle = props?.ButtonStyle ?? ButtonStyle.SECONDARY;
     const hasClick = !!props?.click;
     const click = props?.click;
     const childCount = Children.count(children);
