@@ -327,8 +327,9 @@ export class HyperRendererImpl implements HyperRenderer {
                         successRedirect={successRedirect}
                         failureRedirect={failureRedirect}
                         body={body}
-                        style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
+                        css={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                     >{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</HyperActionButton>
+                    
                 );
             }
 
@@ -366,12 +367,14 @@ export class HyperRendererImpl implements HyperRenderer {
                 const hrefData = populatedComponent.meta?.href;
                 const href : string = isString(hrefData) ? hrefData : '#';
                 if (internalRoutePaths.includes(href)) {
+
                     return (
                         <Link style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                               className={"hg-button"}
                               to={ href }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</Link>
                     );
                 }
+                console.log('RETURNING A ELEMENT')
                 return (
                     <a style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                        className={"hg-button"}
