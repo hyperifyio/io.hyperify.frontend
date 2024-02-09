@@ -374,7 +374,6 @@ export class HyperRendererImpl implements HyperRenderer {
                               to={ href }>{HyperRendererImpl.defaultRenderContent(renderer, content.content, definitions)}</Link>
                     );
                 }
-                console.log('RETURNING A ELEMENT')
                 return (
                     <a style={ populatedComponent.style ? StyleEntity.createFromDTO(populatedComponent.style).getCssStyles() : {} }
                        className={"hg-button"}
