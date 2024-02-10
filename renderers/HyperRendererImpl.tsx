@@ -40,13 +40,13 @@ export class HyperRendererImpl implements HyperRenderer {
     }
 
     private static _fragmentIdIndex : number = 0;
-    private _myFragmentBaseId : number = 0;
+    private readonly _myFragmentBaseId : number = 0;
 
-    private _contentRenderer  : HyperContentRenderer;
-    private _viewRenderer     : HyperViewRenderer;
+    private readonly _contentRenderer  : HyperContentRenderer;
+    private readonly _viewRenderer     : HyperViewRenderer;
     private _appRenderer      : HyperAppRenderer;
     private _routeRenderer    : HyperRouteRenderer;
-    private _publicUrl        : string;
+    private readonly _publicUrl        : string;
 
     private static _getNextFragmentId () : number {
         HyperRendererImpl._fragmentIdIndex += 1;
@@ -62,6 +62,10 @@ export class HyperRendererImpl implements HyperRenderer {
         this._routeRenderer = HyperRendererImpl.defaultRenderRoute.bind(undefined, this);
         this._viewRenderer = HyperRendererImpl.defaultRenderView.bind(undefined, this);
         this._contentRenderer = HyperRendererImpl.defaultRenderContent.bind(undefined, this);
+    }
+
+    public getFragmentId() : number {
+        return this._myFragmentBaseId;
     }
 
     public getPublicUrl () : string {

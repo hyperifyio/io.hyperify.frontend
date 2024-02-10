@@ -1,4 +1,5 @@
-import React from 'react';
+// Copyright (c) 2024. Sendanor <info@sendanor.fi>. All rights reserved.
+
 import { render } from '@testing-library/react';
 import { HyperLayout } from './HyperLayout';
 

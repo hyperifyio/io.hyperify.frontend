@@ -1,6 +1,7 @@
+// Copyright (c) 2023-2024. Sendanor <info@sendanor.fi>. All rights reserved.
+
 import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
-import { mock } from "node:test";
 import { MemoryRouter } from "react-router-dom";
 import { HgTest } from "../../../core/HgTest";
 import { HttpService } from "../../../core/HttpService";
@@ -30,6 +31,7 @@ describe('Hyper Component', () => {
         HgTest.initialize();
 
         mockRenderer = {
+            getFragmentId: jest.fn<any>(),
             getPublicUrl: jest.fn<any>(),
             attachAppRenderer: jest.fn<any>(),
             renderApp: jest.fn<any>(),
@@ -45,8 +47,6 @@ describe('Hyper Component', () => {
     describe('Hyper Component', () => {
 
         it('renders without crashing', () => {
-
-            const hyperRendererImpl = HyperRendererImpl.create('https://localhost:3000');
 
             (mockRenderer.renderApp as ReturnType<typeof jest.fn<any>>).mockReturnValue(<div />);
 

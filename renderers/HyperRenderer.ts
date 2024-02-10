@@ -47,6 +47,11 @@ export interface HyperRouteRenderer {
 export interface HyperRenderer {
 
     /**
+     * Returns an unique base id for this renderer instance.
+     */
+    getFragmentId() : number;
+
+    /**
      * Returns the default public URL
      */
     getPublicUrl () : string;

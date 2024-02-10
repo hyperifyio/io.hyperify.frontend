@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2022. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
+// Copyright (c) 2021-2024. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
 import { ReactNode, useState } from "react";
 import { Theme } from "../../../core/types/Theme";
@@ -14,7 +14,7 @@ export interface HyperLayoutProps {
 
 export function HyperLayout (props: HyperLayoutProps) {
     const children = props?.children;
-    const [ theme, setTheme ] = useState<Theme>(props?.theme ?? Theme.LIGHT);
+    const [ theme, _setTheme ] = useState<Theme>(props?.theme ?? Theme.LIGHT);
     const isThemeDark = theme === Theme.DARK;
     return (
         <div

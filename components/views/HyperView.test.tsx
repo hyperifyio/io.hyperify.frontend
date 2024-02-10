@@ -1,6 +1,7 @@
+// Copyright (c) 2024. Sendanor <info@sendanor.fi>. All rights reserved.
+
 import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
-import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { LogLevel } from "../../../core/types/LogLevel";
 import { AppServiceImpl } from "../../services/AppServiceImpl";
