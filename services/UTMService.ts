@@ -1,18 +1,19 @@
 // Copyright (c) 2024. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
 import { IS_DEVELOPMENT } from "../../core/constants/environment";
-import { filter } from "../../core/functions/filter";
 import { find } from "../../core/functions/find";
-import { parseJson } from "../../core/Json";
+import {
+    parseJson,
+    ReadonlyJsonAny,
+} from "../../core/Json";
 import { LogService } from "../../core/LogService";
-import { isArray } from "../../core/types/Array";
 import { LocalStorageService } from "./LocalStorageService";
 import {
     createUTMParams,
-    isUTMParams,
     isEqualUTMParams,
     UTMParams,
-} from "./types/UTMParams";
+    parseUTMParamsArray,
+} from "../../core/types/UTMParams";
 
 const LOG = LogService.createLogger( 'UTMService' );
 
@@ -20,6 +21,17 @@ const UTM_LOCAL_STORAGE_KEY = "utm_service";
 const UTM_EXPIRATION_TIME : number = 1000*60*60*24*30*6; // 6 months
 
 export class UTMService {
+
+    private static _localStorageKey : string = UTM_LOCAL_STORAGE_KEY;
+    private static _expirationTime : number = UTM_EXPIRATION_TIME;
+
+    public static setLocalStorageKey (name : string) : void {
+        this._localStorageKey = name;
+    }
+
+    public static setExpirationTime (time : number) : void {
+        this._expirationTime = time;
+    }
 
     public static initialize () : void {
         const utmParams = this._getUTMParameters();
@@ -31,6 +43,10 @@ export class UTMService {
 
     public static getUTMParams () : UTMParams[] {
         return this._loadUTMParams();
+    }
+
+    public static getUTMParamsAsJSON () : ReadonlyJsonAny {
+        return this.getUTMParams() as unknown as ReadonlyJsonAny;
     }
 
     private static _getUTMParameters (): UTMParams | undefined {
@@ -61,14 +77,10 @@ export class UTMService {
     }
 
     private static _loadUTMParams () : UTMParams[] {
-        const storedString : string | null = LocalStorageService.getItem(UTM_LOCAL_STORAGE_KEY);
+        const storedString : string | null = LocalStorageService.getItem(this._localStorageKey);
         if (storedString) {
             const storedRaw = parseJson(storedString);
-            if (!isArray(storedRaw)) return [];
-            return filter(
-                storedRaw,
-                ( item : unknown ) : boolean => isUTMParams( item ) && !this._isExpired(item.time, UTM_EXPIRATION_TIME)
-            ) as unknown as UTMParams[];
+            return parseUTMParamsArray(storedRaw, this._expirationTime) ?? [];
         }
         return [];
     }
@@ -78,7 +90,7 @@ export class UTMService {
         LOG.debug(`_saveUTMParams = data =`, data, original);
         if ( find(original, (item) => isEqualUTMParams(item, data)) === undefined ) {
             original.push(data);
-            LocalStorageService.setItem(UTM_LOCAL_STORAGE_KEY, JSON.stringify(original));
+            LocalStorageService.setItem(this._localStorageKey, JSON.stringify(original));
             LOG.debug("_saveUTMParams: Saved UTM: ", data);
         } else {
             LOG.debug("_saveUTMParams: Already stored: ", data)
@@ -93,16 +105,6 @@ export class UTMService {
             const newUrl = url.href;
             window.history.replaceState({ path: newUrl }, '', newUrl);
         }
-    }
-
-    private static _isExpired (timeString: string, seconds: number) : boolean {
-        const now : number = Date.now();
-        if (!timeString) {
-            return true;
-        }
-        const time : number = new Date(timeString).getTime();
-        const duration : number = now - time;
-        return duration >= seconds;
     }
 
 }
