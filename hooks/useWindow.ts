@@ -15,6 +15,7 @@ export function useWindow () : Window | undefined {
         () => {
             const ww = WindowObjectService.getWindow();
             if (ww) {
+                LOG.debug(`Enabled window support`);
                 setW(ww);
             } else {
                 LOG.warn(`Warning! Could not find window element.`);
