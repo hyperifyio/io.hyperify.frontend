@@ -31,21 +31,21 @@ usage, including commercial applications. For full details, refer to the
 
 Run the installation commands from your project's root directory. Usually it's where your `package.json` is located.
 
-For these sample commands we expect your source files to be located in `./src` and we'll use `./src/fi/hg/frontend` for location for our submodule.
+For these sample commands we expect your source files to be located in `./src` and we'll use `./src/io/hyperify/frontend` for location for our submodule.
 
 Setup git submodule:
 
 ```shell
 mkdir -p src/fi/hg
-git submodule add git@github.com:heusalagroup/fi.hg.frontend.git src/fi/hg/frontend
-git config -f .gitmodules submodule.src/fi/hg/frontend.branch main
+git submodule add git@github.com:heusalagroup/fi.hg.frontend.git src/io/hyperify/frontend
+git config -f .gitmodules submodule.src/io/hyperify/frontend.branch main
 ```
 
 Next install our required dependencies (newest [lodash library](https://lodash.com/) and [reflect-metadata library](https://www.npmjs.com/package/reflect-metadata)):
 
 ```shell
-git submodule add git@github.com:heusalagroup/fi.hg.core.git src/fi/hg/core
-git config -f .gitmodules submodule.src/fi/hg/core.branch main
+git submodule add git@github.com:hyperifyio/io.hyperify.core.git src/io/hyperify/core
+git config -f .gitmodules submodule.src/io/hyperify/core.branch main
 npm i --save-dev lodash @types/lodash 'moment-timezone' '@types/moment-timezone'
 ```
 

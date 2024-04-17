@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { LogService } from "../../core/LogService";
 import { useWindow } from "./useWindow";
 
-const LOG = LogService.createLogger('useWindowSize');
+const LOG = LogService.createLogger('useScrollTop');
 
 export function useScrollTop (
     scrollingElement: Element | null | undefined
@@ -32,6 +32,7 @@ export function useScrollTop (
             LOG.debug(`Listening scroll events...`);
             setScrollTop(scrollingElement?.scrollTop);
             if (w) {
+                LOG.debug(`Enabling scroll...`);
                 w.addEventListener('scroll', onScroll);
                 return () => {
                     w.removeEventListener('scroll', onScroll);
