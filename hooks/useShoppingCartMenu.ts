@@ -12,7 +12,7 @@ const LOG = LogService.createLogger('useShoppingCartMenu');
 
 export function useShoppingCartMenu (
     context: string,
-    cartRef: RefObject<HTMLElement> // Add this parameter
+    cartRef: RefObject<HTMLElement>
 ): [ boolean, VoidCallback, VoidCallback ] {
 
     const [ isMenuOpen, setMenuOpen ] = useState<boolean>(StoreCartService.isCartMenuOpen());
