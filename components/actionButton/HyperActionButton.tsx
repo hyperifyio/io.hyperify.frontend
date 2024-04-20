@@ -3,6 +3,7 @@
 import { PropsWithChildren, ReactNode, useCallback } from "react";
 import { isActionDTO } from "../../../core/entities/action/ActionEntity";
 import { isViewDTO } from "../../../core/entities/view/ViewEntity";
+import { kebabCase } from "../../../core/functions/kebabCase";
 import { HttpService } from "../../../core/HttpService";
 import { ReadonlyJsonAny } from "../../../core/Json";
 import { LogService } from "../../../core/LogService";
@@ -28,6 +29,7 @@ export interface HyperActionButtonProps
         PropsWithChildren
 {
     readonly className ?: string;
+    readonly originalName ?: string;
     readonly children  ?: ReactNode;
     readonly method    ?: string;
     readonly target    ?: string;
@@ -164,6 +166,7 @@ async function handleRedirect (
 
 export function HyperActionButton (props: HyperActionButtonProps) {
 
+    const originalName = props?.originalName;
     const className = props?.className;
     const style = props?.style;
     const children = props?.children;
@@ -218,7 +221,11 @@ export function HyperActionButton (props: HyperActionButtonProps) {
                 ...(css ? css : {}),
               } }
             click={clickCallback}
-            className={HYPER_ARTICLE_CLASS_NAME + (className ? ` ${className}` : "")}
+            className={
+            HYPER_ARTICLE_CLASS_NAME
+                + (className ? ` ${className}` : "")
+                + (' app-' + kebabCase(originalName))
+        }
         >{children}</Button>
     );
 
