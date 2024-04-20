@@ -6,6 +6,7 @@ import {
     useCallback,
     useEffect,
 } from "react";
+import { kebabCase } from "../../../core/functions/kebabCase";
 import { ReadonlyJsonObject } from "../../../core/Json";
 import { LogService } from "../../../core/LogService";
 import { LogLevel } from "../../../core/types/LogLevel";
@@ -130,6 +131,7 @@ export function HyperView (props: HyperViewProps) {
             className={
                 HYPER_VIEW_CLASS_NAME
                 + (className? ` ${className}` : '')
+                + (name? ` view-${kebabCase(name)}` : '')
             }
             style={StyleEntity.createFromDTO(style).getCssStyles()}>
             {location.pathname === routePath ? (
