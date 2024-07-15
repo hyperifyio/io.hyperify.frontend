@@ -33,6 +33,7 @@ export interface TextFieldProps {
     readonly change?: FieldChangeCallback<string | undefined>;
     readonly changeState?: FieldChangeCallback<FormFieldState>;
     readonly children?: ReactNode;
+    readonly icon?: ReactNode;
 }
 
 export function TextField (props: TextFieldProps) {
@@ -54,7 +55,7 @@ export function TextField (props: TextFieldProps) {
         props?.change,
         props?.changeState,
         props?.value,
-         props?.model?.required ?? isRequired,
+        props?.model?.required ?? isRequired,
         props?.model?.minLength ? props?.model?.minLength : props?.minLength,
         props?.model?.maxLength ? props?.model?.maxLength :  props?.maxLength
 
@@ -69,6 +70,7 @@ export function TextField (props: TextFieldProps) {
                 + ` ${className ? ` ${className}` : ''}`
             }
         >
+            {props.icon && <span className={`${COMPONENT_CLASS_NAME}-icon`}>{props.icon}</span>}
             {label ? (
                 <span className={
                     COMPONENT_CLASS_NAME + '-label'

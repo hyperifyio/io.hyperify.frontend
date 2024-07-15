@@ -34,5 +34,16 @@
     max-width     : 100%;
     min-width     : 0;
   }
+  & > .hg-text-field-icon {
+    display: flex;
+    pointer-events: none;
+    margin: 1em;
+
+    & > svg {
+      height: 3em;
+      width: auto;
+      fill: #fff;
+    }
+  }
 
 }
