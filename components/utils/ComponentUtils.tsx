@@ -1,6 +1,9 @@
 // Copyright (c) 2022. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
-import { ReactNode } from "react";
+import {
+    Fragment,
+    ReactNode,
+} from "react";
 import { endsWith } from "../../../core/functions/endsWith";
 import { filter } from "../../../core/functions/filter";
 import { find } from "../../../core/functions/find";
@@ -67,14 +70,14 @@ export class ComponentUtils {
 
                         if (paragraphText.includes('\n\n')) {
                             const texts = paragraphText.split('\n\n');
-                            return <>{map(
+                            return <Fragment key={`paragraph-${i}`}>{map(
                                 texts,
                                 (text: string, subIndex:number) : any => {
                                     return (
                                         <p key={`paragraph-${i}-${subIndex}`}>{text}</p>
                                     );
                                 }
-                            )}</>;
+                            )}</Fragment>;
                         }
 
                         return (
