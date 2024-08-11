@@ -9,8 +9,8 @@ import { ButtonStyle } from "../../../core/frontend/button/ButtonStyle";
 export interface SubmitButtonProps {
     readonly className ?: string;
     readonly children  ?: ReactNode;
-    readonly style  ?: ButtonStyle;
-    readonly enabled?: boolean;
+    readonly style     ?: ButtonStyle;
+    readonly enabled   ?: boolean;
 }
 
 export function SubmitButton (props: SubmitButtonProps) {
