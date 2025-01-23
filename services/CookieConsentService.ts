@@ -1,6 +1,5 @@
 // Copyright (c) 2024. Heusala Group Oy <info@heusalagroup.fi>. All rights reserved.
 
-import { EmailTokenDTO } from "../../core/auth/email/types/EmailTokenDTO";
 import { JsonAny } from "../../core/Json";
 import { LogService } from "../../core/LogService";
 import {
